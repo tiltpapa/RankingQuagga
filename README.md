@@ -14,8 +14,12 @@
 ## インストール
 1. Github上の[RankingQuagga.ppam](RankingQuagga.ppam)のページに飛ぶ
 2. "Download raw file"をクリックしてプラグイン本体をダウンロード  
-![画像あとで貼る](images/download-raw-file.png)
-3. "%APPDATA%\Roaming\Microsoft\AddIn"にコピー
+![download-raw-file](images/download-raw-file.png)
+3. "%APPDATA%\Microsoft\AddIns"にコピー
+これ以降はOfficeバージョンによって差異がある可能性アリ
+4. "ファイル"→"オプション"→"アドイン"→"管理"項目の"PowerPointアドイン"を選択し"設定"をクリック
+5. "新規追加"より3.でコピーしたプラグイン本体を選択する
+6. "RankingQuagga"にチェックがついていることを確認し、設定ウィンドウを閉じる
 
 ## Dependencies
 - VBA-JSON (MIT License): https://github.com/VBA-tools/VBA-JSON
