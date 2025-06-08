@@ -1,6 +1,7 @@
 # Quagga APIモック
 
-テスト目的のCloudflare Workersを使用したAPIモックサービスです。
+テスト目的のCloudflare Workersを使用したAPIモックサービスです。  
+`https://ranking-quagga.tiltpapa.workers.dev`にてデプロイしています。
 
 ## 機能
 
