@@ -1,0 +1,16 @@
+{
+  "name": "ranking-api-mock",
+  "version": "1.0.0",
+  "description": "Mock API for testing ranking functionality",
+  "main": "index.js",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy"
+  },
+  "dependencies": {
+    "@faker-js/faker": "^8.0.2"
+  },
+  "devDependencies": {
+    "wrangler": "^3.0.0"
+  }
+} 
