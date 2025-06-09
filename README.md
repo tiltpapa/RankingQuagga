@@ -8,8 +8,9 @@
 ## ファイル
 - srcフォルダ: RankingQuagga.pptmを解凍したもの
 - imagesフォルダ: README用画像
+- mockフォルダ: テストサーバーのソース
 - RankingQuagga.ppam: **プラグイン本体**
-- RankingQuagga.pptm: 編集用
+- RankingQuagga.pptm: 編集・ソース公開用
 
 ## インストール
 1. Github上の[RankingQuagga.ppam](RankingQuagga.ppam)のページに飛ぶ
@@ -25,7 +26,7 @@
 1. リボンの"RankingQuagga"タブを選択
 2. "設定"をクリック
 3. イベントIDと秘密の暗号を入力  
-\(サーバーは"テストサーバー"を選択する必要はない。テストサーバーについては＠＠＠フォルダを参照)
+\(サーバーは"テストサーバー"を選択する必要はない。テストサーバーについては[mockフォルダ](mock)を参照)
 4. "保存"をクリック。設定内容はファイル毎に保存される。
 5. 成績を反映させるオブジェクト名を下図のように編集(階層はこの通りでなくてよい、"番号"はランクの意)  
 ![object-name](images/object-name.png)
