@@ -93,6 +93,56 @@ function generateTotalResults(top = 35) {
   return sortedResults;
 }
 
+// 問題データを生成する関数
+function generateQuestion() {
+  return {
+    period: 1,
+    description: "答えはどれ",
+    q_format: "alternative",
+    answer: "1",
+    point: 1,
+    time: 10,
+    choice_number: 4,
+    answer_number: 1,
+    is_enquete: false,
+    money: 10000,
+    payment_type_name: "full"
+  };
+}
+
+// 回答データを生成する関数
+function generateAnswers() {
+  const answers = [];
+  const correctCount = Math.floor(Math.random() * 10) + 6; // 6-15人のランダムな正解者数
+  let correctAssigned = 0;
+  
+  for (let i = 0; i < 15; i++) {
+    const time = (Math.random() * 9.99 + 0.01).toFixed(2);
+    const shouldBeCorrect = correctAssigned < correctCount && 
+      (Math.random() < (correctCount - correctAssigned) / (15 - i));
+    
+    if (shouldBeCorrect) correctAssigned++;
+    
+    const answer = shouldBeCorrect ? "1" : String(Math.floor(Math.random() * 3) + 2);
+    
+    answers.push({
+      answer: answer,
+      correct: answer === "1",
+      time: time,
+      member: generateMember(i + 1)
+    });
+  }
+  
+  // timeでソート
+  const sortedAnswers = answers.sort((a, b) => parseFloat(a.time) - parseFloat(b.time));
+  
+  // ソート後にIDを割り振る
+  return sortedAnswers.map((answer, index) => ({
+    ...answer,
+    id: 50 + index + 1
+  }));
+}
+
 // リクエストハンドラー
 async function handleRequest(request) {
   const url = new URL(request.url);
@@ -115,6 +165,14 @@ async function handleRequest(request) {
     const top = params.get('top') ? parseInt(params.get('top')) : 35;
     
     return new Response(JSON.stringify({ results: generateTotalResults(top) }), { headers });
+  }
+  
+  // 問題データを生成する関数
+  if (path.match(/\/programs\/[^\/]+\/questions\/last_aggregate$/)) {
+    return new Response(JSON.stringify({
+      question: generateQuestion(),
+      answers: generateAnswers()
+    }), { headers });
   }
   
   // 該当するエンドポイントがない場合は404を返す
