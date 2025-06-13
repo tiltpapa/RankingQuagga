@@ -7,11 +7,15 @@
           <button id="btnSettings" label="設定" size="large" imageMso="AddInManager" onAction="ShowSettingsForm" />
         </group>
         <group id="grpEvent" label="自動反映">
-          <button id="btnShape" label="自動反映用シェイプを配置(ピリオド)" size="normal" onAction="AddPeriodShape" screentip="成績を表示させる予定のスライドを選択している状態でクリック" />
+          <button id="btnTopShape" label="自動反映用シェイプを配置(早押しトップ10)" size="normal" onAction="AddTopShape" screentip="成績を表示させる予定のスライドを選択している状態でクリック" />
+          <button id="btnBottomShape" label="自動反映用シェイプを配置(予選落ち)" size="normal" onAction="AddBottomShape" screentip="成績を表示させる予定のスライドを選択している状態でクリック" />
+          <button id="btnPeriodShape" label="自動反映用シェイプを配置(ピリオド)" size="normal" onAction="AddPeriodShape" screentip="成績を表示させる予定のスライドを選択している状態でクリック" />
           <button id="btnEnableEvent" label="自動反映を有効" size="normal" onAction="InitializeApp" screentip="スライドショーを開始する前にクリック" />
           <button id="btnDisableEvent" label="自動反映を無効" size="normal" onAction="FinalizeApp" />
         </group>
         <group id="grpMacro" label="マクロ">
+          <button id="btnTop" label="早押しトップ10を反映" size="normal" onAction="UpdateTopRanking" screentip="成績を表示させる予定のスライドを選択している状態でクリック" />
+          <button id="btnBottom" label="予選落ちを反映" size="normal" onAction="UpdateBottomRanking" screentip="成績を表示させる予定のスライドを選択している状態でクリック" />
           <button id="btnPeriod" label="ピリオド成績を反映" size="normal" onAction="UpdatePeriodRanking" screentip="成績を表示させる予定のスライドを選択している状態でクリック" />
           <button id="btnTotal" label="総合成績を反映" size="normal" onAction="UpdateTotalRanking" screentip="最下位を表示させる予定のスライドを選択している状態でクリック" />
         </group>
