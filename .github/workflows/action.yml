@@ -1,0 +1,88 @@
+name: VBA Source Extractor
+description: 'Extract VBA source files from Excel/Word files'
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - "main"
+    paths:
+      - '**.pptm'
+
+env:
+  TARGET_DIR: '.'
+  VBA_DIR: 'vba-src'
+
+jobs:
+  extract-vba:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      with:
+        submodules: true
+        token: ${{ secrets.GITHUB_TOKEN }}
+        fetch-depth: 0
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.8'
+
+    - name: Configure Git
+      run: |
+        echo "Set Requestor as ${{ github.actor }}"
+        git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+        git config --global user.name "github-actions[bot]"
+        
+        if [ "${{ github.event_name }}" = "pull_request" ]; then
+          echo "Checkout for PR source branch ${{ github.head_ref }}"
+          export branchname="${{ github.head_ref }}"
+        else
+          echo "Checkout for branch ${{ github.ref_name }}"
+          export branchname="${{ github.ref_name }}"
+        fi
+        echo "branchname=$branchname" >> $GITHUB_ENV
+        echo "Checkout for branch-name $branchname"
+
+    - name: Install extract_vba_source
+      run: |
+        echo "Install pipenv"
+        python -m pip install pip --upgrade
+        pip install pipenv
+        echo "Install extract_vba_source"
+        git clone https://github.com/takeruko/extract_vba_source.git
+
+    - name: Modify extract_vba_source.py to support .pptm files
+      run: |
+        echo "Adding .pptm extension support to extract_vba_source.py"
+        # .xlam行の後に.pptmを追加
+        sed -i "s/\\('.xlam',.*# Excel book with macro\\)/\\1\\n    '.pptm',  # PowerPoint presentation with macros/" ./extract_vba_source/extract_vba_source.py
+        # 変更を確認
+        head -15 ./extract_vba_source/extract_vba_source.py
+
+    - name: Extract VBA source files
+      run: |
+        echo "Specify the location of the Pipfile and run extract_vba_source.py"
+        export PIPENV_PIPFILE=$(pwd)/extract_vba_source/Pipfile
+        pipenv install
+        pipenv run python ./extract_vba_source/extract_vba_source.py \
+                          --dest ${{ env.VBA_DIR }} \
+                          --src-encoding='cp932' \
+                          --out-encoding='utf8' \
+                          --recursive \
+                          ${{ env.TARGET_DIR }}
+
+    - name: Commit VBA source files
+      run: |
+        git status
+        git add ${{ env.VBA_DIR }}
+        git status
+        if [ -n "$(git diff --cached)" ]; then
+          git commit -m "Extracted vba source files. [skip ci]"
+          git push origin $branchname
+        else
+          echo "No changes to commit"
+        fi
+  
