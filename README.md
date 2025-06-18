@@ -8,7 +8,8 @@
 - 総合成績
 
 ## ファイル
-- srcフォルダ: RankingQuagga.pptmを解凍したもの
+- srcフォルダ: ~~RankingQuagga.pptmを解凍したもの~~→customUI14.xmlを残し削除
+- vba-srcフォルダ: VBAソース、[Github Actions](.github/workflows/action.yml)により展開
 - imagesフォルダ: README用画像
 - mockフォルダ: テストサーバーのソース
 - RankingQuagga.ppam: **プラグイン本体**
