@@ -19,13 +19,13 @@ Public Sub UpdatePeriodRanking(Optional slide As slide)
     For i = 1 To Min(results.Count, 10)
         Call SetShapeTextByZOrder(slide, i, "番号", results(i)("rank"))
         Call SetShapeTextByZOrder(slide, i, "ポイント", results(i)("point"))
-        Call SetShapeTextByZOrder(slide, i, "タイム", FormatTime(Val(results(i)("time"))))
+        Call SetShapeTextByZOrder(slide, i, "タイム", Format(Val(results(i)("time")), "0.00"))
         Call SetShapeTextByZOrder(slide, i, "名前", results(i)("member")("user")("name"))
     Next
     
     Call SetShapeTextByZOrder(slide, 1, "番号色変", results(1)("rank"))
     Call SetShapeTextByZOrder(slide, 1, "ポイント色変", results(1)("point"))
-    Call SetShapeTextByZOrder(slide, 1, "タイム色変", FormatTime(Val(results(1)("time"))))
+    Call SetShapeTextByZOrder(slide, 1, "タイム色変", Format(Val(results(1)("time")), "0.00"))
     Call SetShapeTextByZOrder(slide, 1, "名前色変", results(1)("member")("user")("name"))
     
     MsgBox "反映しました", Title:="完了"
