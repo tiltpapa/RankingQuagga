@@ -16,6 +16,7 @@
           <button id="btnBottom" label="予選落ちを反映" size="normal" onAction="UpdateBottomRanking" screentip="成績を表示させる予定のスライドを選択している状態でクリック" />
           <button id="btnPeriod" label="ピリオド成績を反映" size="normal" onAction="UpdatePeriodRanking" screentip="成績を表示させる予定のスライドを選択している状態でクリック" />
           <button id="btnTotal" label="総合成績を反映" size="normal" onAction="UpdateTotalRanking" screentip="最下位を表示させる予定のスライドを選択している状態でクリック" />
+          <button id="btnPrize" label="賞金ランキングを反映" size="normal" onAction="UpdatePrizeRanking" screentip="賞金最下位を表示させる予定のスライドを選択している状態でクリック" />
         </group>
       </tab>
     </tabs>
