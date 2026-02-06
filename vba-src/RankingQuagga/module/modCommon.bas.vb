@@ -127,12 +127,14 @@ Public Sub ResetField(sld As slide)
         Call SetShapeTextByZOrder(sld, pos, "ポイント", "", False)
         Call SetShapeTextByZOrder(sld, pos, "タイム", "", False)
         Call SetShapeTextByZOrder(sld, pos, "名前", "", False)
+        Call SetShapeTextByZOrder(sld, pos, "賞金", "", False)
     Next
     
     Call SetShapeTextByZOrder(sld, 1, "番号色変", "", False)
     Call SetShapeTextByZOrder(sld, 1, "ポイント色変", "", False)
     Call SetShapeTextByZOrder(sld, 1, "タイム色変", "", False)
     Call SetShapeTextByZOrder(sld, 1, "名前色変", "", False)
+    Call SetShapeTextByZOrder(sld, 1, "賞金色変", "", False)
 End Sub
 
 ' 独自Max関数

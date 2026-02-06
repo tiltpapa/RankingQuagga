@@ -1,4 +1,4 @@
-Public Sub UpdateTotalRanking()
+Public Sub UpdatePrizeRanking()
     Dim eventId As String
     eventId = ActivePresentation.Tags("event_id")
     If eventId = "" Then
@@ -24,6 +24,9 @@ Public Sub UpdateTotalRanking()
 
     Dim results As Collection
     Set results = data("results")
+    
+    Call SortCollectionByMoney(results)
+    
     Dim i As Integer
     If totalTop = 0 Or totalTop >= results.Count Then
         totalTop = results.Count
@@ -97,8 +100,8 @@ Public Sub UpdateTotalRanking()
     End If
     
     Call SetShapeTextByZOrder(currentSlide, 1, "番号色変", results(1)("rank"))
-    Call SetShapeTextByZOrder(currentSlide, 1, "ポイント色変", results(1)("point"))
-    Call SetShapeTextByZOrder(currentSlide, 1, "タイム色変", FormatTime(Val(results(1)("time"))))
+    Call SetShapeTextByZOrder(currentSlide, 1, "ポイント色変", results(1)("point"), False)
+    Call SetShapeTextByZOrder(currentSlide, 1, "賞金色変", Format(Val(results(1)("money")), "#,###"))
     Call SetShapeTextByZOrder(currentSlide, 1, "名前色変", results(1)("member")("user")("name"))
     
     MsgBox "反映しました", Title:="完了"
@@ -118,8 +121,36 @@ End Sub
 Private Sub SetShapeText(sld As slide, pos As Integer, score As Dictionary)
     Dim shp As Shape
     Call SetShapeTextByZOrder(sld, pos, "番号", score("rank"))
-    Call SetShapeTextByZOrder(sld, pos, "ポイント", score("point"))
-    Call SetShapeTextByZOrder(sld, pos, "タイム", FormatTime(Val(score("time"))))
+    Call SetShapeTextByZOrder(sld, pos, "ポイント", score("point"), False)
+    Call SetShapeTextByZOrder(sld, pos, "賞金", Format(Val(score("money")), "#,###"))
     Call SetShapeTextByZOrder(sld, pos, "名前", score("member")("user")("name"))
+End Sub
+
+Private Sub SortCollectionByMoney(ByRef results As Collection)
+    Dim i As Long, j As Long
+    Dim vi As Dictionary, vj As Dictionary
+    For i = 1 To results.Count - 1
+        For j = i + 1 To results.Count
+            If Val(results(i)("money")) < Val(results(j)("money")) Then
+                Set vi = results(i)
+                Set vj = results(j)
+
+                results.Remove i
+                results.Add vj, , i
+                
+                results.Remove j
+                
+                If j > results.Count Then
+                    results.Add vi
+                Else
+                    results.Add vi, , j
+                End If
+            End If
+        Next j
+    Next i
+    
+    For i = 1 To results.Count
+        results(i)("rank") = i
+    Next i
 End Sub
 

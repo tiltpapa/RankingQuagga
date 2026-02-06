@@ -37,6 +37,10 @@ Sub UpdateTotalRanking(control As IRibbonControl)
     Call modTotalResult.UpdateTotalRanking ' 既に定義済みのマクロを呼び出す
 End Sub
 
+Sub UpdatePrizeRanking(control As IRibbonControl)
+    Call modTotalPrize.UpdatePrizeRanking ' 既に定義済みのマクロを呼び出す
+End Sub
+
 Sub AddTrigShape(control As IRibbonControl)
     UserForm2.Show
 End Sub
