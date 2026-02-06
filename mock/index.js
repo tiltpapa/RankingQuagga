@@ -80,6 +80,7 @@ function generateTotalResults(top = 35) {
       rank: 0, // 後で正しい順位を設定
       point: point,
       time: time,
+      money: money,
       member: generateMember(i + 1)
     });
   }
