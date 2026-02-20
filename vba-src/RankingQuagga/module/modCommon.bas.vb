@@ -50,6 +50,10 @@ Public Function FormatTime(sec As Double) As String
     FormatTime = mins & ":" & Format(secs, "00.00")
 End Function
 
+Public Function FormatPrize(money As Double) As String
+    FormatPrize = IIf(money = 0, "0", Format(money, "#,###"))
+End Function
+
 Public Sub SetShapeTextByZOrder(sld As slide, pos As Integer, name As String, txt As Variant, Optional critical As Boolean = True)
     Dim shp As Shape
     Set shp = GetShapeByZOrder(sld, pos, name, critical): If shp Is Nothing Then Exit Sub Else shp.TextFrame.TextRange.Text = txt

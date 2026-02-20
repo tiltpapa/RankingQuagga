@@ -101,7 +101,7 @@ Public Sub UpdatePrizeRanking()
     
     Call SetShapeTextByZOrder(currentSlide, 1, "番号色変", results(1)("rank"))
     Call SetShapeTextByZOrder(currentSlide, 1, "ポイント色変", results(1)("point"), False)
-    Call SetShapeTextByZOrder(currentSlide, 1, "賞金色変", Format(Val(results(1)("money")), "#,###"))
+    Call SetShapeTextByZOrder(currentSlide, 1, "賞金色変", FormatPrize(Val(results(1)("money"))))
     Call SetShapeTextByZOrder(currentSlide, 1, "名前色変", results(1)("member")("user")("name"))
     
     MsgBox "反映しました", Title:="完了"
@@ -122,7 +122,7 @@ Private Sub SetShapeText(sld As slide, pos As Integer, score As Dictionary)
     Dim shp As Shape
     Call SetShapeTextByZOrder(sld, pos, "番号", score("rank"))
     Call SetShapeTextByZOrder(sld, pos, "ポイント", score("point"), False)
-    Call SetShapeTextByZOrder(sld, pos, "賞金", Format(Val(score("money")), "#,###"))
+    Call SetShapeTextByZOrder(sld, pos, "賞金", FormatPrize(Val(score("money"))))
     Call SetShapeTextByZOrder(sld, pos, "名前", score("member")("user")("name"))
 End Sub
 
