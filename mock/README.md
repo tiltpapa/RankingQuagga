@@ -36,7 +36,7 @@ npm run deploy
 ### 直近に集計された問題情報
 - エンドポイント: `/programs/{event_id}/questions/last_aggregate`
 - questionは固定です
-- 15件の回答情報を返します
+- 28件の回答情報を返します
 - 6-15人が正解します
 
 ### 特定のピリオドの成績

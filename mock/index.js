@@ -117,7 +117,7 @@ function generateAnswers() {
   const correctCount = Math.floor(Math.random() * 10) + 6; // 6-15人のランダムな正解者数
   let correctAssigned = 0;
   
-  for (let i = 0; i < 15; i++) {
+  for (let i = 0; i < 28; i++) {
     const time = (Math.random() * 9.99 + 0.01).toFixed(2);
     const shouldBeCorrect = correctAssigned < correctCount && 
       (Math.random() < (correctCount - correctAssigned) / (15 - i));
